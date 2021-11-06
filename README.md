@@ -1,9 +1,16 @@
-# Vue 3 + Vite + Inter Font + FontAwesome Icons
-
+# Vue 3 + Vite + Tailwind + Firebase
+## with Ubutu and Fontawesome 
+---
 ### Installation:
 
-#### 1. Degit the repository (type your own app name):
-> npx degit https://github.com/AvetisDN/vue3-tailwindcss-template.git your-app-name
+#### 1. Degit or clone the repository (type your own app name):
+> npx degit https://github.com/AvetisDN/f11-vue-firebase.git your-app-name
+
+or
+
+> got clone https://github.com/AvetisDN/f11-vue-firebase.git
+
+
 
 
 #### 2. Go to destination directory
