@@ -24,6 +24,15 @@
           autocomplete="new-password"
         />
       </div>
+      <div>
+        <input
+          type="text"
+          name="vuegram-username"
+          placeholder="Display Name"
+          v-model="username"
+          autocomplete="new-password"
+        />
+      </div>
       <div class="relative">
         <input
           :type="!showP ? 'password' : 'text'"
@@ -92,66 +101,72 @@ import {
   GithubAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { useRouter } from "vue-router";
 import Alert from "../components/Alert.vue";
 
 export default {
-    setup() {
-        const showP = ref(false);
-        const showCP = ref(false);
-        const email = ref("");
-        const password = ref("");
-        const confirm = ref("");
-        const error = ref("");
-        const auth = getAuth();
-        const router = useRouter();
-        const register = () => {
-            if (password.value === confirm.value) {
-                createUserWithEmailAndPassword(auth, email.value, password.value)
-                    .then(res => {
-                        router.push('/')
-                    })
-                    .catch(err => {
-                        error.value = err.message
-                    })
-            }
-            else {
-                error.value = "Password and Confirm Password must be equal";
-            }
-        };
-        const registerGoogle = () => {
-            const provider = new GoogleAuthProvider()
-            signInWithPopup(auth, provider)
-                .then(res => {
-                    router.push('/')
-                })
-                .catch(err => {
-                    error.value = err.message
-                })
-        };
-        const registerGithub = () => {
-            const provider = new GithubAuthProvider()
-            signInWithPopup(auth, provider)
-                .then(res => {
-                    router.push('/')
-                })
-                .catch(err => {
-                    error.value = err.message
-                })
-        };
-        return {
-            showCP,
-            showP,
-            email,
-            password,
-            confirm,
-            error,
-            register,
-            registerGithub,
-            registerGoogle,
-        };
-    },
-    components: { Alert }
+  setup() {
+    const showP = ref(false);
+    const showCP = ref(false);
+    const email = ref("");
+    const username = ref("");
+    const password = ref("");
+    const confirm = ref("");
+    const error = ref("");
+    const auth = getAuth();
+    const router = useRouter();
+    const register = () => {
+      if (password.value === confirm.value) {
+        createUserWithEmailAndPassword(auth, email.value, password.value)
+          .then((res) => {
+            updateProfile(auth.currentUser, {
+              displayName: username.value,
+            }).then((res) => {
+              router.push("/");
+            });
+          })
+          .catch((err) => {
+            error.value = err.message;
+          });
+      } else {
+        error.value = "Password and Confirm Password must be equal";
+      }
+    };
+    const registerGoogle = () => {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then((res) => {
+          router.push("/");
+        })
+        .catch((err) => {
+          error.value = err.message;
+        });
+    };
+    const registerGithub = () => {
+      const provider = new GithubAuthProvider();
+      signInWithPopup(auth, provider)
+        .then((res) => {
+          router.push("/");
+        })
+        .catch((err) => {
+          error.value = err.message;
+        });
+    };
+    return {
+      showCP,
+      showP,
+      email,
+      password,
+      confirm,
+      error,
+      username,
+      register,
+      registerGithub,
+      registerGoogle,
+    };
+  },
+  components: { Alert },
 };
 </script>
