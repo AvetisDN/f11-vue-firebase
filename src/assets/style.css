@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+    a,
+    button,
+    input,
+    select,
+    textarea {
+        @apply transition-all duration-300
+    }
+    a {
+        @apply text-blue-500 hover:text-pink-600
+    }
+    .container {
+        @apply max-w-7xl mx-auto px-4
+    }
+    header {
+        @apply bg-blueGray-700 shadow-md border-b border-blueGray-300 text-white py-4
+    }
+    header a {
+        @apply text-teal-100 hover:text-blueGray-200
+    }
+    .main-menu {
+        @apply flex font-medium text-lg gap-x-6 items-center
+    }
+    .main-menu a {
+        @apply hover:text-teal-400
+    }
+    .main-menu a.router-link-exact-active {
+        @apply text-teal-400
+    }
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-bold text-blueGray-800
+    }
+    h4 {
+        @apply text-lg
+    }
+    h3 {
+        @apply text-xl text-blueGray-700
+    }
+    h2 {
+        @apply text-2xl text-blueGray-600
+    }
+    h1 {
+        @apply text-3xl text-blueGray-600
+    }
+    input,
+    textarea,
+    select {
+        @apply bg-white py-2 px-3 font-medium w-full outline-none focus:outline-none rounded border-2 border-blueGray-300 focus:border-blueGray-500
+    }
+    .btn {
+        @apply py-2 px-6 bg-teal-600 text-white font-bold rounded-sm hover:bg-teal-700
+    }
+    .btn.btn-red {
+        @apply bg-red-500 hover:bg-red-600
+    }
+    .btn.btn-gray {
+        @apply bg-blueGray-600 hover:bg-blueGray-700
+    }
+    .alert {
+        @apply bg-blueGray-300 text-blueGray-900 p-4 rounded-sm border-2 border-blueGray-400
+    }
+    .alert.alert-error {
+        @apply bg-red-200 text-red-900 border-red-300
+    }
+    .alert.alert-info {
+        @apply bg-cyan-200 text-cyan-900 border-cyan-300
+    }
+    .avatar {
+        @apply w-10 h-10 rounded-full border-4 border-opacity-40 bg-cyan-900 text-cyan-200 font-bold text-lg flex justify-center items-center uppercase
+    }
+}
