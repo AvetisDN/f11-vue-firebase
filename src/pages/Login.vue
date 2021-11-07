@@ -11,6 +11,7 @@
         rounded-sm
         bg-blueGray-100
         shadow-md
+        mb-20
       "
       @submit.prevent="login"
     >
@@ -82,6 +83,7 @@ export default {
     const showP = ref(false);
     const email = ref("");
     const password = ref("");
+    const error = ref("");
     const auth = getAuth();
     const router = useRouter();
 
@@ -97,7 +99,7 @@ export default {
     const loginGoogle = () => {
       const provider = new GoogleAuthProvider();
       signInWithPopup(auth, provider)
-        .then((res) => {
+        .then(() => {
           router.push("/");
         })
         .catch((err) => {
@@ -119,6 +121,7 @@ export default {
       showP,
       email,
       password,
+      error,
       login,
       loginGithub,
       loginGoogle,

@@ -20,7 +20,7 @@
         <router-link to="/register" v-if="!user"> Register </router-link>
         <router-link to="/login" v-if="!user"> Login </router-link>
       </nav>
-      <div v-if="!user">
+      <div v-if="!user" class="min-w-[160px] text-right">
         Hello, Guest
       </div>
       <div v-else class="flex gap-x-2 items-center">

@@ -5,94 +5,95 @@
         <div>
           <h3 class="mb-3">Touch a feed</h3>
           <input
-            type="text"
-            name="postTitle"
-            placeholder="Post title..."
-            required
-            v-model="title"
+              type="text"
+              name="postTitle"
+              placeholder="Post title..."
+              required
+              v-model="title"
           />
         </div>
         <div
-          class="
+            class="
             flex-grow flex flex-col-reverse
             sm:flex-col
             md:flex-col-reverse
           "
         >
           <h3
-            class="mb-[15px] text-right font-normal text-base"
-            :class="content.length === 150 ? 'text-red-600' : ''"
+              class="mb-[15px] text-right font-normal text-base"
+              :class="content.length === 150 ? 'text-red-600' : ''"
           >
             {{ content.length }} / 150
           </h3>
           <textarea
-            required
-            name="postContent"
-            rows="5"
-            class="w-full"
-            placeholder="Post content..."
-            maxlength="150"
-            v-model="content"
+              required
+              name="postContent"
+              rows="5"
+              class="w-full"
+              placeholder="Post content..."
+              maxlength="150"
+              v-model="content"
           ></textarea>
         </div>
       </div>
-      
+
       <button class="btn mt-3 w-full">
         addKiwi(<i class="fas fa-kiwi-bird mx-1"></i>);
       </button>
-      <input type="hidden" name="uid" :value="uid" />
-      <input type="hidden" name="displayName" :value="displayName" />
-      <input type="hidden" name="photoURL" :value="photoURL" />
+      <input type="hidden" name="uid" :value="uid"/>
+      <input type="hidden" name="displayName" :value="displayName"/>
+      <input type="hidden" name="photoURL" :value="photoURL"/>
     </form>
-    <Alert v-if="message" :message="message" :type="type" />
+    <Alert v-if="message" :message="message" :type="type"/>
   </div>
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
-import { getFirestore, addDoc, collection } from "firebase/firestore";
-import { mapGetters } from "vuex";
+import {ref} from "@vue/reactivity";
+import {getFirestore, addDoc, collection, serverTimestamp} from "firebase/firestore";
+import {mapGetters} from "vuex";
 import Alert from "./Alert.vue";
+
 export default {
-    setup() {
-        const title = ref("");
-        const content = ref("");
-        const message = ref('')
-        const type = ref('')
-        const db = getFirestore();
-        const createKiwi = async () => {
-            const newKiwi = {
-                title: title.value,
-                content: content.value,
-                uid: document.querySelector("input[name='uid']").value,
-                displayName: document.querySelector("input[name='displayName']").value,
-                photoURL: document.querySelector("input[name='photoURL']").value,
-            };
-            try {
-                const docRef = await addDoc(collection(db, "kiwies"), newKiwi);
-                title.value = "";
-                content.value = "";
-                type.value = 'success'
-                message.value = 'Kiwi was successfully created'
-                setTimeout(() => {
-                    message.value = ''
-                    type.value = ''
-                }, 3000)
-            }
-            catch (e) {
-                type.value = 'error'
-                message.value = 'Error' + e.message
-                setTimeout(() => {
-                    message.value = ''
-                    type.value = ''
-                }, 3000)
-            }
-        };
-        return { title, content, message, type, createKiwi };
-    },
-    computed: {
-        ...mapGetters(["displayName", "photoURL", "uid"]),
-    },
-    components: { Alert }
+  setup() {
+    const title = ref("");
+    const content = ref("");
+    const message = ref('')
+    const type = ref('')
+    const db = getFirestore();
+    const createKiwi = async () => {
+      const newKiwi = {
+        title: title.value,
+        content: content.value,
+        uid: document.querySelector("input[name='uid']").value,
+        displayName: document.querySelector("input[name='displayName']").value,
+        photoURL: document.querySelector("input[name='photoURL']").value,
+        timestamp: serverTimestamp()
+      };
+      try {
+        const docRef = await addDoc(collection(db, "kiwi"), newKiwi);
+        title.value = "";
+        content.value = "";
+        type.value = 'success'
+        message.value = `Kiwi was successfully created with ID: ${docRef.id}`
+        setTimeout(() => {
+          message.value = ''
+          type.value = ''
+        }, 3000)
+      } catch (e) {
+        type.value = 'error'
+        message.value = 'Error' + e.message
+        setTimeout(() => {
+          message.value = ''
+          type.value = ''
+        }, 3000)
+      }
+    };
+    return {title, content, message, type, createKiwi};
+  },
+  computed: {
+    ...mapGetters(["displayName", "photoURL", "uid"]),
+  },
+  components: {Alert}
 };
 </script>

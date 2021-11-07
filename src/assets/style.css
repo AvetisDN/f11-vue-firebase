@@ -16,7 +16,7 @@
         @apply max-w-7xl mx-auto px-4
     }
     header {
-        @apply bg-blueGray-700 shadow-md border-b border-blueGray-300 text-white py-4
+        @apply bg-blueGray-700 shadow-md border-b border-blueGray-300 text-white py-2
     }
     header a {
         @apply text-teal-100 hover:text-blueGray-200

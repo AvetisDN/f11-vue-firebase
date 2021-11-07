@@ -11,6 +11,7 @@
         rounded-sm
         bg-blueGray-100
         shadow-md
+        mb-20
       "
       @submit.prevent="register"
     >
@@ -120,10 +121,10 @@ export default {
     const register = () => {
       if (password.value === confirm.value) {
         createUserWithEmailAndPassword(auth, email.value, password.value)
-          .then((res) => {
+          .then(() => {
             updateProfile(auth.currentUser, {
               displayName: username.value,
-            }).then((res) => {
+            }).then(() => {
               router.push("/");
             });
           })
@@ -137,7 +138,7 @@ export default {
     const registerGoogle = () => {
       const provider = new GoogleAuthProvider();
       signInWithPopup(auth, provider)
-        .then((res) => {
+        .then(() => {
           router.push("/");
         })
         .catch((err) => {
@@ -147,7 +148,7 @@ export default {
     const registerGithub = () => {
       const provider = new GithubAuthProvider();
       signInWithPopup(auth, provider)
-        .then((res) => {
+        .then(() => {
           router.push("/");
         })
         .catch((err) => {
