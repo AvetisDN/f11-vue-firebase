@@ -62,6 +62,10 @@
     .btn.btn-gray {
         @apply bg-blueGray-600 hover:bg-blueGray-700
     }
+    .btn.btn-small {
+        @apply px-3 text-sm
+    }
+
     .alert {
         @apply bg-blueGray-300 text-blueGray-900 p-4 rounded-sm border-2 border-blueGray-400
     }
@@ -70,6 +74,9 @@
     }
     .alert.alert-info {
         @apply bg-cyan-200 text-cyan-900 border-cyan-300
+    }
+    .alert.alert-success {
+        @apply bg-emerald-200 text-emerald-900 border-emerald-300
     }
     .avatar {
         @apply w-10 h-10 rounded-full border-4 border-opacity-40 bg-cyan-900 text-cyan-200 font-bold text-lg flex justify-center items-center uppercase

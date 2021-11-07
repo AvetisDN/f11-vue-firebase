@@ -14,6 +14,21 @@ const store = createStore({
             commit('SET_USER', payload)
         }
     },
+    getters: {
+        displayName(state) {
+            const {user} = state
+            if(user) {
+                return user.displayName ? user.displayName : user.reloadUserInfo.screenName
+            }
+            return '' 
+        },
+        photoURL(state) {
+            return state.user.photoURL
+        },
+        uid(state) {
+            return state.user.uid
+        },
+    }
 })
 
 export default store

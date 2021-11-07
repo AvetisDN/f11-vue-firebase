@@ -11,6 +11,7 @@ import './assets/style.css'
 const firebaseConfig = {
     apiKey: "AIzaSyDsz7utnq48S0DaTejzi_LdjKuQRykEF3o",
     authDomain: "frontend11-e2a81.firebaseapp.com",
+    databaseURL: "https://frontend11-e2a81-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "frontend11-e2a81",
     storageBucket: "frontend11-e2a81.appspot.com",
     messagingSenderId: "204212641827",
@@ -24,6 +25,7 @@ const auth = getAuth()
 let app
 
 onAuthStateChanged(auth, (user) => {
+    // console.log(user)
     store.dispatch('setUser', user)
     if(!app) {
         app = createApp(App);

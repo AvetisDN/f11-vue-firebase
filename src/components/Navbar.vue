@@ -12,14 +12,30 @@
       "
     >
       <router-link to="/" class="text-2xl font-bold flex items-center gap-x-2">
-        <i class="fab fa-vuejs text-4xl"></i>
-        vuegram
+        <i class="fas fa-kiwi-bird text-4xl"></i>
+        kiwi_gram
       </router-link>
       <nav class="main-menu">
-        <router-link to="/"> Home </router-link>
-        <router-link to="/register"> Register </router-link>
-        <router-link to="/login"> Login </router-link>
+        <router-link to="/" v-if="user"> Home </router-link>
+        <router-link to="/register" v-if="!user"> Register </router-link>
+        <router-link to="/login" v-if="!user"> Login </router-link>
       </nav>
+      <div v-if="!user">
+        Hello, Guest
+      </div>
+      <div v-else class="flex gap-x-2 items-center">
+        <img :src="photoURL" :alt="displayName" class="avatar" v-if="photoURL">
+        <div v-else class="avatar">
+          {{displayName.substr(0, 1)}}
+        </div>
+        <span>Hello, </span>
+        <span class="font-bold">
+          {{displayName}}
+        </span>
+        <button class="btn btn-red btn-small ml-4" @click="logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
     </div>
   </header>
 </template>
@@ -27,6 +43,7 @@
 <script>
 import { getAuth, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
+import { mapGetters, mapState } from "vuex";
 export default {
   setup() {
     const auth = getAuth();
@@ -39,5 +56,9 @@ export default {
     }
     return { logout };
   },
+  computed: {
+    ...mapState(['user']),
+    ...mapGetters(['displayName', 'photoURL'])
+  }
 };
 </script>
