@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-blueGray-200 p-4 rounded shadow-md md:w-60 lg:w-72">
+  <div class="bg-blueGray-200 p-4 rounded shadow-md md:w-60 lg:w-72 flex-shrink-0">
     <form @submit.prevent="createKiwi" class="mb-2">
       <div class="flex flex-col sm:flex-row md:flex-col gap-y-3 gap-x-2">
         <div>

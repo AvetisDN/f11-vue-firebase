@@ -12,6 +12,13 @@ const router = createRouter({
       }
     },
     {
+      path: "/about",
+      component: () => import("../pages/About.vue"),
+      meta: {
+        is_private: true
+      }
+    },
+    {
       path: "/register",
       component: () => import("../pages/Register.vue"),
       meta: {

@@ -81,4 +81,10 @@
     .avatar {
         @apply w-10 h-10 rounded-full border-4 border-opacity-40 bg-cyan-900 text-cyan-200 font-bold text-lg flex justify-center items-center uppercase
     }
+    .avatar.medium {
+        @apply w-12 h-12
+    }
+    .avatar.big {
+        @apply w-14 h-14
+    }
 }

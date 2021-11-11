@@ -44,7 +44,7 @@
         </button>
       </div>
       <div class="flex justify-between mt-1">
-        <button class="btn" type="submit">Register</button>
+        <button class="btn" type="submit">Login</button>
         <div class="flex gap-x-2">
           <button
             class="btn px-4 btn-red"

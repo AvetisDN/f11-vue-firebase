@@ -17,6 +17,7 @@
       </router-link>
       <nav class="main-menu">
         <router-link to="/" v-if="user"> Home </router-link>
+        <router-link to="/about" v-if="user"> About </router-link>
         <router-link to="/register" v-if="!user"> Register </router-link>
         <router-link to="/login" v-if="!user"> Login </router-link>
       </nav>
@@ -24,10 +25,7 @@
         Hello, Guest
       </div>
       <div v-else class="flex gap-x-2 items-center">
-        <img :src="photoURL" :alt="displayName" class="avatar" v-if="photoURL">
-        <div v-else class="avatar">
-          {{displayName.substr(0, 1)}}
-        </div>
+        <Avatar :photoURL="photoURL" :displayName="displayName"/>
         <span>Hello, </span>
         <span class="font-bold">
           {{displayName}}
@@ -44,7 +42,9 @@
 import { getAuth, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { mapGetters, mapState } from "vuex";
+import Avatar from './Avatar.vue';
 export default {
+  components: { Avatar },
   setup() {
     const auth = getAuth();
     const router = useRouter()
