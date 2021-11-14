@@ -17,7 +17,7 @@
       </router-link>
       <nav class="main-menu">
         <router-link to="/" v-if="user"> Home </router-link>
-        <router-link to="/about" v-if="user"> About </router-link>
+        <router-link to="/profile" v-if="user"> Profile </router-link>
         <router-link to="/register" v-if="!user"> Register </router-link>
         <router-link to="/login" v-if="!user"> Login </router-link>
       </nav>

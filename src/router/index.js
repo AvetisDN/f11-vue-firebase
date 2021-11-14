@@ -19,6 +19,20 @@ const router = createRouter({
       }
     },
     {
+      path: "/profile",
+      component: () => import("../pages/Profile.vue"),
+      meta: {
+        is_private: true
+      }
+    },
+    // {
+    //   path: "/profile2",
+    //   component: () => import("../pages/Profile2.vue"),
+    //   meta: {
+    //     is_private: true
+    //   }
+    // },
+    {
       path: "/register",
       component: () => import("../pages/Register.vue"),
       meta: {

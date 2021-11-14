@@ -7,12 +7,18 @@ const store = createStore({
     mutations: {
         SET_USER(state, payload) {
             state.user = payload
+        },
+        SET_PHOTO(state, payload) {
+            state.user = {...state.user, payload}
         }
     },
     actions: {
         setUser({commit}, payload) {
             commit('SET_USER', payload)
-        }
+        },
+        setPhoto({commit}, payload) {
+            commit('SET_PHOTO', {photoURL: payload})
+        },
     },
     getters: {
         displayName(state) {
